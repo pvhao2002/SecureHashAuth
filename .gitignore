@@ -1,0 +1,73 @@
+# Môi trường ảo Python
+.venv/
+venv/
+env/
+.env/
+.env.*
+!.env.example
+
+# Bytecode & đóng gói
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Mypy / Ruff / các công cụ
+.mypy_cache/
+.ruff_cache/
+
+# IDE & editor
+.idea/
+*.swp
+*.swo
+*~
+
+# VS Code (bỏ comment dòng dưới nếu muốn commit cấu hình workspace)
+# .vscode/
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db
+
+# Biến môi trường & bí mật (không đẩy lên Git)
+*.pem
+secrets/
+*.db-journal
+
+# SQLite / DB cục bộ (chỉnh nếu bạn muốn commit file mẫu nhỏ)
+*.db
+*.sqlite3
+
+# Log
+*.log
+logs/
+
+# Hashcat / John / kết quả crack (thường nhạy cảm hoặc rất lớn)
+*.potfile
+hashcat.potfile

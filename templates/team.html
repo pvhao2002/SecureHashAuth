@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Nhóm thực hiện · SecureHashAuth{% endblock %}
+
+{% block content %}
+<div class="dash">
+  <header class="dash__header">
+    <p class="eyebrow">Giới thiệu</p>
+    <h1 class="headline headline--sm">Nhóm thực hiện dự án</h1>
+    <p class="lede lede--muted">
+      Các thành viên phát triển <strong>SecureHashAuth</strong> — nghiên cứu và triển khai băm mật khẩu Bcrypt, Scrypt, Argon2.
+    </p>
+  </header>
+
+  <div class="dash__grid">
+    {% for m in members %}
+    <article class="stat-card{% if m.is_leader %} stat-card--leader{% endif %}">
+      {% if m.is_leader %}
+      <p class="team-role-badge" role="status">Nhóm trưởng</p>
+      {% endif %}
+      <h2 class="stat-card__label">Thành viên</h2>
+      <p class="stat-card__value">{{ m.name }}</p>
+      <p class="stat-card__hint">Mã số sinh viên: <strong>{{ m.student_id }}</strong></p>
+    </article>
+    {% endfor %}
+  </div>
+
+  <div class="dash__actions">
+    <a href="/" class="btn btn--ghost">Về trang chủ</a>
+    {% if user %}
+    <a href="/dashboard" class="btn btn--muted">Bảng điều khiển</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

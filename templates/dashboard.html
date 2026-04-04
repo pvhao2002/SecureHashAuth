@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Bảng điều khiển · {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="dash">
+  {% if flash_ok %}
+  <div class="alert alert--ok" role="status">{{ flash_ok }}</div>
+  {% endif %}
+  {% if flash_error %}
+  <div class="alert alert--err" role="alert">{{ flash_error }}</div>
+  {% endif %}
+
+  <header class="dash__header">
+    <h1 class="headline headline--sm">Xin chào, {{ user.username }}</h1>
+    <p class="lede lede--muted">Thông tin tài khoản và thuật toán băm đã chọn lúc đăng ký.</p>
+  </header>
+
+  <div class="dash__grid">
+    <article class="stat-card">
+      <h2 class="stat-card__label">Thuật toán</h2>
+      <p class="stat-card__value stat-card__value--algo">{{ user.algorithm | upper }}</p>
+      <p class="stat-card__hint">
+        {% if user.algorithm == "bcrypt" %}
+        Tốn CPU; cost rounds trong chuỗi hash.
+        {% elif user.algorithm == "scrypt" %}
+        Kết hợp CPU và bộ nhớ (N, r, p).
+        {% else %}
+        Argon2id: kháng GPU/ASIC tốt hơn nhiều scheme cũ.
+        {% endif %}
+      </p>
+    </article>
+    <article class="stat-card">
+      <h2 class="stat-card__label">Mã người dùng</h2>
+      <p class="stat-card__value">#{{ user.id }}</p>
+      <p class="stat-card__hint">Khóa chính trong bảng <code>users</code></p>
+    </article>
+    <article class="stat-card">
+      <h2 class="stat-card__label">Thời điểm tạo</h2>
+      <p class="stat-card__value stat-card__value--sm">{{ user.created_at.strftime("%Y-%m-%d %H:%M") }} UTC</p>
+      <p class="stat-card__hint">Lưu theo timezone-aware UTC</p>
+    </article>
+  </div>
+
+  <section class="card card--wide">
+    <h2 class="card__title">Chuỗi băm (đã ẩn bớt)</h2>
+    <p class="card__text">Toàn bộ salt và tham số được mã hoá trong chuỗi; hiển thị một phần để minh hoạ định dạng.</p>
+    <pre class="hash-snippet" aria-label="Một phần chuỗi băm">{{ hash_preview }}</pre>
+  </section>
+
+  <div class="dash__actions">
+    <a href="/" class="btn btn--ghost">Về trang chủ</a>
+    <a href="/logout" class="btn btn--muted">Đăng xuất</a>
+  </div>
+</div>
+{% endblock %}

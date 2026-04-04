@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Đăng nhập · SecureHashAuth{% endblock %}
+
+{% block content %}
+<div class="layout-split">
+  <section class="panel panel--intro">
+    <p class="eyebrow">Hệ thống xác thực</p>
+    <h1 class="headline">Mật khẩu được băm an toàn trên máy chủ</h1>
+    <p class="lede">
+      Chọn thuật toán khi <strong>đăng ký</strong>: mỗi tài khoản gắn một trong ba hàm
+      <span class="tag">Bcrypt</span>
+      <span class="tag">Scrypt</span>
+      <span class="tag">Argon2id</span>.
+      Salt và tham số nằm trong chuỗi băm — không lưu mật khẩu gốc.
+    </p>
+    <ul class="feature-list">
+      <li>API xử lý tại server (FastAPI + SQLAlchemy)</li>
+      <li>CSDL SQLite, chỉ cột <code>password_hash</code> dạng modular crypt</li>
+      <li>Phiên cookie httpOnly qua session</li>
+    </ul>
+    {% if user %}
+    <div class="card card--inline">
+      <p>Bạn đã đăng nhập là <strong>{{ user.username }}</strong>.</p>
+      <a class="btn btn--primary" href="/dashboard">Vào bảng điều khiển</a>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="panel panel--forms">
+    {% if flash_ok %}
+    <div class="alert alert--ok" role="status">{{ flash_ok }}</div>
+    {% endif %}
+    {% if flash_error %}
+    <div class="alert alert--err" role="alert">{{ flash_error }}</div>
+    {% endif %}
+
+    <div class="tabs" role="tablist">
+      <button type="button" class="tabs__btn is-active" data-tab="login" role="tab" aria-selected="true">Đăng nhập</button>
+      <button type="button" class="tabs__btn" data-tab="register" role="tab" aria-selected="false">Đăng ký</button>
+    </div>
+
+    <div id="panel-login" class="tab-panel is-visible" role="tabpanel">
+      <h2 class="form-title">Chào mừng trở lại</h2>
+      <p class="form-sub">Nhập thông tin tài khoản của bạn.</p>
+      <form class="form" method="post" action="/login" autocomplete="on">
+        <label class="field">
+          <span class="field__label">Tên đăng nhập</span>
+          <input class="field__input" name="username" required maxlength="64" autocomplete="username">
+        </label>
+        <label class="field">
+          <span class="field__label">Mật khẩu</span>
+          <input class="field__input" name="password" type="password" required autocomplete="current-password">
+        </label>
+        <button class="btn btn--primary btn--block" type="submit">Đăng nhập</button>
+      </form>
+    </div>
+
+    <div id="panel-register" class="tab-panel" role="tabpanel" hidden>
+      <h2 class="form-title">Tạo tài khoản</h2>
+      <p class="form-sub">Chọn thuật toán băm mật khẩu cho tài khoản này.</p>
+      <form class="form" method="post" action="/register" autocomplete="on">
+        <label class="field">
+          <span class="field__label">Tên đăng nhập</span>
+          <input class="field__input" name="username" required maxlength="64" autocomplete="username">
+        </label>
+        <label class="field">
+          <span class="field__label">Mật khẩu</span>
+          <input class="field__input" name="password" type="password" required minlength="8" autocomplete="new-password">
+          <span class="field__hint">Tối thiểu 8 ký tự</span>
+        </label>
+        <fieldset class="field">
+          <legend class="field__label">Thuật toán băm</legend>
+          <div class="algo-grid">
+            {% for value, label in algorithms %}
+            <label class="radio-card">
+              <input type="radio" name="algorithm" value="{{ value }}" {% if loop.first %}checked{% endif %}>
+              <span class="radio-card__body">
+                <span class="radio-card__title">{{ label }}</span>
+                {% if value == "bcrypt" %}
+                <span class="radio-card__desc">CPU-cost, phổ biến, rounds cố định</span>
+                {% elif value == "scrypt" %}
+                <span class="radio-card__desc">Memory-hard, tham số N·r·p</span>
+                {% else %}
+                <span class="radio-card__desc">Winner PHC, Argon2id mặc định</span>
+                {% endif %}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+        <button class="btn btn--accent btn--block" type="submit">Đăng ký</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var btns = document.querySelectorAll('.tabs__btn');
+  var panels = {
+    login: document.getElementById('panel-login'),
+    register: document.getElementById('panel-register')
+  };
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var tab = btn.getAttribute('data-tab');
+      btns.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      Object.keys(panels).forEach(function (key) {
+        var p = panels[key];
+        var show = key === tab;
+        p.classList.toggle('is-visible', show);
+        p.hidden = !show;
+      });
+    });
+  });
+})();
+</script>
+{% endblock %}

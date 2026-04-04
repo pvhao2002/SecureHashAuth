@@ -1,0 +1,17 @@
+# Web & API
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+jinja2>=3.1.0
+python-multipart>=0.0.6
+itsdangerous>=2.0.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# Password hashing (Bcrypt, Scrypt, Argon2 qua passlib)
+# bcrypt 5.x đổi API — passlib 1.7.4 cần bcrypt < 5
+passlib[bcrypt]>=1.7.4
+bcrypt==4.0.1
+argon2-cffi>=23.1.0
+# tùy chọn: backend scrypt nhanh hơn builtin
+scrypt>=0.8.20
