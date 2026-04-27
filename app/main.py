@@ -149,7 +149,8 @@ async def dashboard(request: Request, db: Annotated[Session, Depends(get_db)]):
     flash_ok = request.session.pop("flash_ok", None)
     flash_error = request.session.pop("flash_error", None)
     # Không truyền full hash lên UI — chỉ tiền tố che bớt
-    hash_preview = user.password_hash[:24] + "…" if len(user.password_hash) > 24 else user.password_hash
+    # hash_preview = user.password_hash[:24] + "…" if len(user.password_hash) > 24 else user.password_hash
+    hash_preview = user.password_hash
     return templates.TemplateResponse(
         request,
         "dashboard.html",
