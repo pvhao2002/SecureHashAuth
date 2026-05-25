@@ -13,7 +13,7 @@ python3 -m venv .venv
 .venv/bin/uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Mở trình duyệt: [http://127.0.0.1:8000](http://127.0.0.1:8000). CSDL SQLite tạo tại `data/app.db`. Kiến trúc & lưu đồ: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+Mở trình duyệt: [http://127.0.0.1:8000](http://127.0.0.1:8000). CSDL SQLite tạo tại `data/app.db`. Kiến trúc & lưu đồ: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). **Bổ sung báo cáo khóa luận** (nguyên lý dữ liệu băm, môi trường web, thực nghiệm): [`docs/bao-cao/README.md`](docs/bao-cao/README.md).
 
 **Production:** đặt biến môi trường `SECRET_KEY` (chuỗi bí mật cố định) để cookie phiên không bị mất mỗi lần khởi động lại server.
 

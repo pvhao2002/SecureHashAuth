@@ -1,0 +1,4 @@
+algorithm,params,hash_mean_ms,hash_min_ms,hash_max_ms,verify_mean_ms,verify_min_ms,verify_max_ms
+bcrypt,rounds=20,64093.961,64093.961,64093.961,63721.268,63721.268,63721.268
+scrypt,"rounds=14, block_size=8, parallelism=1",93.732,93.732,93.732,92.88,92.88,92.88
+argon2,"time_cost=3, memory_cost=65536, parallelism=2, type=ID",77.519,77.519,77.519,67.83,67.83,67.83

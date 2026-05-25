@@ -89,6 +89,16 @@ flowchart LR
 
 **Nguyên tắc:** Không cột `password` plain; không tách salt ra cột riêng bắt buộc (salt nằm trong `password_hash` theo chuẩn passlib).
 
+### Tham số băm (`app/auth/hashing.py`)
+
+| Thuật toán | Tham số Passlib |
+|------------|-----------------|
+| Bcrypt | `rounds=20` |
+| Scrypt | `rounds=14`, `block_size=8`, `parallelism=1` |
+| Argon2id | `time_cost=3`, `memory_cost=65536`, `parallelism=2`, `type="ID"` |
+
+Kết quả đo mẫu: `results/benchmark_hash.csv`. Tài liệu báo cáo: `docs/bao-cao/`.
+
 ## 5. Thư mục mã nguồn liên quan
 
 ```

@@ -25,7 +25,7 @@ def hash_password(plain_password: str, algorithm: HashAlgorithm) -> tuple[str, s
     Trả về (password_hash, algorithm_key) để lưu CSDL.
     """
     if algorithm == HashAlgorithm.BCRYPT:
-        digest = bcrypt.using(rounds=18).hash(plain_password)
+        digest = bcrypt.using(rounds=20).hash(plain_password)
     elif algorithm == HashAlgorithm.SCRYPT:
         digest = scrypt.using(rounds=14, block_size=8, parallelism=1).hash(plain_password)
     else:
