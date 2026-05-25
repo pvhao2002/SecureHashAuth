@@ -4,7 +4,7 @@ Ba phần thiếu trong báo cáo — sẵn sàng copy vào Word:
 
 | File | Nội dung |
 |------|----------|
-| [01-nguyen-ly-du-lieu-bam.md](01-nguyen-ly-du-lieu-bam.md) | Nguyên lý hoạt động **dữ liệu** băm (đăng ký / đăng nhập) |
+| [01-nguyen-ly-du-lieu-bam.md](01-nguyen-ly-du-lieu-bam.md) | Nguyên lý **dữ liệu băm** theo **Bcrypt / Scrypt / Argon2id** (không trọng tâm luồng đăng ký) |
 | [02-moi-truong-trien-khai.md](02-moi-truong-trien-khai.md) | Web chạy trên đâu (Uvicorn, FastAPI, SQLite, port 8000) |
 | [03-du-lieu-thuc-nghiem.md](03-du-lieu-thuc-nghiem.md) | Khung + **số liệu** thực nghiệm (cập nhật khi chạy script) |
 
